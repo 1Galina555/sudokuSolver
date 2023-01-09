@@ -1,9 +1,19 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+import java.util.Map;
+import java.util.TreeMap;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Map;
+import java.util.TreeMap;
 //Класс будет представлять из себя поле судоку.
 public class Sudoku {
+    private String filename;
     private List<Integer> grid;     //Само поле судоку.
 
     public Sudoku(List<Integer> grid) {
@@ -92,5 +102,50 @@ public class Sudoku {
             System.out.println();
         }
     }
+    public Sudoku(String filename){
+        try (FileReader result = new FileReader(filename)) {
 
+            int j = 0;
+            for (int i = 0; i < grid.size(); i++) {
+                j++;
+                String otvet = Integer.toString(grid.get(i));
+                result.read();
+                if (j % 9 == 0)
+                    result.read();
+            }
+            for (int i = 0; i < 9; ++i) {
+                for (j = 0; j < 9; ++j) {
+                    System.out.print(get(i, j) + " ");
+                }
+                System.out.println();
+            }
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void writeToFile(String fileName) {
+
+        try (FileWriter result = new FileWriter(fileName)) {
+
+            int j = 0;
+            for (int i = 0; i < grid.size(); i++) {
+                j++;
+                String otvet = Integer.toString(grid.get(i));
+                result.write(otvet + " ");
+                if (j % 9 == 0)
+                    result.write("\n");
+            }
+            for (int i = 0; i < 9; ++i) {
+                for (j = 0; j < 9; ++j) {
+                    System.out.print(get(i, j) + " ");
+                }
+                System.out.println();
+            }
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }

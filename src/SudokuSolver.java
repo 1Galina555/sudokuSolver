@@ -35,5 +35,6 @@ public class SudokuSolver {
         //Все клетки заняты и судоку валидное.
         sudoku.printState();
         System.out.println("Iterations: " + ITERATIONS);
+        sudoku.writeToFile("new.txt");
     }
 }
